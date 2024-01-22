@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # Download file from bucket.
     blobs[0].download_to_filename(temp_local_filename)
     output_folder = "output"
-    extract_frames(temp_local_filename, output_folder)
+    extract_frames(temp_local_filename, output_folder,file_name)
 
 
 
