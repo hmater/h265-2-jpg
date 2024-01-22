@@ -69,8 +69,8 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
     client = storage.Client()
     blobs = []
     for blob in client.list_blobs(bucket, prefix=prefix):
-        if(str(blob.name).endswith('.h265') and (not exist(blob.name.replace("/","_").replace(".","_")))):
-            print (str(blob.name))
+        if(str(blob.name).endswith('.h265') and (exist(blob.name.replace("/","_").replace(".","_")))):
+            #print (str(blob.name))
             blobs.append(blob)
     #TO-DO: filter out registries on table proccesed-files
     print("FILES:")
