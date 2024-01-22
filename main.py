@@ -32,18 +32,13 @@ def exist(file_name):
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
 
-    QUERY = ('SELECT filename FROM `DataVision.processed_files` ')
+    QUERY = ('SELECT filename FROM `DataVision.processed_files` WHERE filename=='+file_name) #buscar si filename ya estaba en la db
     query_job = client.query(QUERY)                                         # API request
     rows = query_job.result()                                               # Waits for query to finish
 
-    print("FILE NAME: " +  file_name)
-    for row in rows:
-        print("FILE INDB: " + row[0])
-        
-    # if (file_name in rows):
-    #     return True
-    
-    # return False
+    if (rows.len>0):
+            return True                                                     #si ya estaba, archivo existe, ya fue procesado antes
+    return False
 
 
 
