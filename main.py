@@ -1,6 +1,7 @@
 import cv2
 import os
 import sys
+from google.cloud import storage
 
 
 def extract_frames(input_file, output_folder):
@@ -28,9 +29,20 @@ def extract_frames(input_file, output_folder):
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python main.py input_file_path")
-        sys.exit(1)
+        #sys.exit(1)
 
     input_file_path = sys.argv[1]
     output_folder = "output"
 
-    extract_frames(input_file_path, output_folder)
+    client = storage.Client()
+    for blob in client.list_blobs('ap_test_collection_aw1_raw_input', prefix='1000000070d5eb51/2024/01/17/14'):
+        print(str(blob))
+
+    #extract_frames(input_file_path, output_folder)
+
+
+
+
+
+
+
