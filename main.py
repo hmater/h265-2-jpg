@@ -82,6 +82,9 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
 if __name__ == "__main__":
 
     blobs = get_videos()
+    if(len(blobs)==0):
+        print("No files: empty input or all input has been processed")
+        sys.exit(1)
 
     file_name = blobs[0].name
     file_name = file_name.replace("/","_").replace(".","_")
