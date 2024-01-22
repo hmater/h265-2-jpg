@@ -35,7 +35,7 @@ def exist(file_name):
     QUERY = 'SELECT * FROM `DataVision.processed_files` WHERE `filename` = "'+file_name+'";' #buscar si filename ya estaba en la db
     print (QUERY)
     query_job = client.query((QUERY))                                       # API request
-    rows = query_job.result()                                               # Waits for query to finish
+    rows = list(query_job.result())                                               # Waits for query to finish
 
     if (rows.len>0):
             return True                                                     #si ya estaba, archivo existe, ya fue procesado antes
