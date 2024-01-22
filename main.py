@@ -12,7 +12,7 @@ def save(file_name):
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
-    sql = "INSERT INTO processed_files(filename, datetime) VALUES ("+file_name+","+datetime+")"
+    sql = "INSERT INTO processed_files(filename, datetime) VALUES ("+file_name+","+str(datetime)+")"
     query_job = client.query(sql, job_config=job_config)
     query_job.result()
 
