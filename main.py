@@ -37,7 +37,7 @@ def exist(file_name):
     query_job = client.query((QUERY))                                       # API request
     rows = list(query_job.result())                                               # Waits for query to finish
 
-    if (rows.len>0):
+    if (len(rows)>0):
             return True                                                     #si ya estaba, archivo existe, ya fue procesado antes
     return False
 
