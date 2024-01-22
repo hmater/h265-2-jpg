@@ -35,7 +35,7 @@ def exist(file_name):
     query_job = client.query(QUERY)                                         # API request
     rows = query_job.result()                                               # Waits for query to finish
 
-    if (not(file_name in rows)):
+    if (file_name in rows):
         return True
     
     return False
@@ -69,7 +69,7 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
     client = storage.Client()
     blobs = []
     for blob in client.list_blobs(bucket, prefix=prefix):
-        if(str(blob.name).endswith('.h265') and (exist(blob.name.replace("/","_").replace(".","_")))):
+        if(str(blob.name).endswith('.h265') and (not exist(blob.name.replace("/","_").replace(".","_")))):
             print (str(blob.name))
             blobs.append(blob)
     #TO-DO: filter out registries on table proccesed-files
