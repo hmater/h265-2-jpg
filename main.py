@@ -36,7 +36,8 @@ if __name__ == "__main__":
 
     client = storage.Client()
     for blob in client.list_blobs('ap_test_collection_aw1_raw_input', prefix='1000000070d5eb51/2024/01/17/14'):
-        print(str(blob))
+        if(str(blob.name).endswith('.h265')):
+            print (str(blob.name))
 
     #extract_frames(input_file_path, output_folder)
 
