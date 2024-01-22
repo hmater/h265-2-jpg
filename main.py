@@ -8,16 +8,18 @@ from google.cloud import storage
 from google.cloud import bigquery
 
 def save(file_name):
-
+    print("saving name to db...")
+    dt = str(datetime)
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
-    sql = "INSERT INTO processed_files(filename, datetime) VALUES ("+file_name+","+str(datetime)+")"
+    sql = "INSERT INTO processed_files(filename, datetime) VALUES ("+file_name+",CURRENT_DATETIME())"
     query_job = client.query(sql, job_config=job_config)
     query_job.result()
 
 
 def extract_frames(input_file, output_folder,video_name=""):
+    print("extracting frames from")
     video_capture = cv2.VideoCapture(input_file)
     if not video_capture.isOpened():
         print("Error opening the video file.")
@@ -26,6 +28,7 @@ def extract_frames(input_file, output_folder,video_name=""):
     count = 0
     if(video_name==""):                                                     #if no video name provided, use name of temporary file
         video_name = os.path.splitext(os.path.basename(input_file))[0]
+    print(video_name)
     output_folder = output_folder + "/" + video_name                        #adding folder named after the file
     os.makedirs(output_folder, exist_ok=True)                               #if folder doesnt exist, create it (always happening since folder addition)
     while success:
@@ -38,6 +41,7 @@ def extract_frames(input_file, output_folder,video_name=""):
 
 
 def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5eb51/2024/01/17/14'):
+    print("getting videos...")
     client = storage.Client()
     blobs = []
     for blob in client.list_blobs(bucket, prefix=prefix):
