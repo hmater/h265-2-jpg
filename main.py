@@ -9,7 +9,8 @@ from google.cloud import bigquery
 
 def save(file_name):
     print("saving name to db...")
-    dt = str(datetime)
+    #dt = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    dt = datetime.now()
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
