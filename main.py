@@ -43,22 +43,25 @@ if __name__ == "__main__":
             video_gs = blob
 
 
-    temp = tempfile.NamedTemporaryFile()
+    # temp = tempfile.NamedTemporaryFile()
     
-    try:
-        temp.write(video_gs)
-        output_folder = "output"
-        extract_frames(temp, output_folder)
-    finally:
-        temp.close()
+    # try:
+    #     temp.write(video_gs)
+    #     output_folder = "output"
+    #     extract_frames(temp, output_folder)
+    # finally:
+    #     temp.close()
 
 
-    #file_name = blob.name
-    #_, temp_local_filename = tempfile.mkstemp()
+    file_name = video_gs.name
+    _, temp_local_filename = tempfile.mkstemp()
+    temp = tempfile.NamedTemporaryFile()
 
     # Download file from bucket.
-    #blob.download_to_filename(temp_local_filename)
-
+    
+    video_gs.download_to_filename(temp_local_filename)
+    output_folder = "output"
+    extract_frames(temp_local_filename, output_folder)
 
 
 
