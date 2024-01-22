@@ -25,7 +25,7 @@ def save(file_name):
         print("encountered errors while inserting rows: {}".format(errors))
 
 def exist(file_name):
-    print("checking if file exist already...")
+    #print("checking if file exist already...")
     file_name = file_name.replace("/","_").replace(".","_")
 
     client = bigquery.Client()
@@ -74,8 +74,6 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
             #print (str(blob.name))
             blobs.append(blob)
     #TO-DO: filter out registries on table proccesed-files
-    print("FILES:")
-    print (blobs)
     return blobs
 
 
