@@ -14,7 +14,6 @@ def save(file_name):
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
-    file_name = file_name.replace("/","_").replace(".","_")
 
     rows_to_insert = [
         {"filename": file_name, "datetime": dt}
@@ -76,6 +75,7 @@ if __name__ == "__main__":
     blobs = get_videos()
 
     file_name = blobs[0].name
+    file_name = file_name.replace("/","_").replace(".","_")
     _, temp_local_filename = tempfile.mkstemp()
     
     # Download file from bucket.
