@@ -17,7 +17,7 @@ def save(file_name):
     rows_to_insert = [
         {"filename": file_name, "datetime": dt}
     ]
-
+    print(rows_to_insert)
     errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
     if errors == []:
         print("new rows have been added.")
@@ -25,9 +25,9 @@ def save(file_name):
         print("encountered errors while inserting rows: {}".format(errors))
 
 
-    sql = "INSERT INTO processed_files(filename, datetime) VALUES ('"+file_name+"',CURRENT_DATETIME())"
-    query_job = client.query(sql, job_config=job_config)
-    query_job.result()
+    #sql = "INSERT INTO processed_files(filename, datetime) VALUES ('"+file_name+"',CURRENT_DATETIME())"
+    #query_job = client.query(sql, job_config=job_config)
+    #query_job.result()
 
 
 def extract_frames(input_file, output_folder,video_name=""):
