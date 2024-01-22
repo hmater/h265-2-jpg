@@ -14,7 +14,7 @@ def save(file_name):
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
-    file_name = file_name.replace("//","_").replace(".","_")
+    file_name = file_name.replace("/","_").replace(".","_")
 
     rows_to_insert = [
         {"filename": file_name, "datetime": dt}
