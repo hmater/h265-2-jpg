@@ -13,6 +13,18 @@ def save(file_name):
     client = bigquery.Client()
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
+
+    rows_to_insert = [
+        {"filename": file_name, "datetime": dt}
+    ]
+
+    errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
+    if errors == []:
+        print("new rows have been added.")
+    else:
+        print("encountered errors while inserting rows: {}".format(errors))
+
+
     sql = "INSERT INTO processed_files(filename, datetime) VALUES ('"+file_name+"',CURRENT_DATETIME())"
     query_job = client.query(sql, job_config=job_config)
     query_job.result()
@@ -21,7 +33,7 @@ def save(file_name):
 def extract_frames(input_file, output_folder,video_name=""):
     if(video_name==""):                                                     #if no video name provided, use name of temporary file
         video_name = os.path.splitext(os.path.basename(input_file))[0]
-        print("extracting frames from "+video_name)
+    print("extracting frames from "+video_name)
     video_capture = cv2.VideoCapture(input_file)
     if not video_capture.isOpened():
         print("Error opening the video file.")
