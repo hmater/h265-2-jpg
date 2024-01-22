@@ -36,9 +36,9 @@ def exist(file_name):
     query_job = client.query(QUERY)                                         # API request
     rows = query_job.result()                                               # Waits for query to finish
 
-    print("FILE NAME" +  file_name)
+    print("FILE NAME: " +  file_name)
     for row in rows:
-        print("FILE INDB" +  str(row))
+        print("FILE INDB: " + row[0])
         
     # if (file_name in rows):
     #     return True
