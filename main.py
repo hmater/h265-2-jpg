@@ -33,7 +33,7 @@ def exist(file_name):
 
     # Perform a query.
     QUERY = ('SELECT filename FROM `DataVision.processed_files` ')
-    query_job = client.query(QUERY,job_config=job_config)  # API request
+    query_job = client.query(QUERY)  # API request
     rows = query_job.result()  # Waits for query to finish
 
     for row in rows:
