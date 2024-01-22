@@ -73,6 +73,8 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
             print (str(blob.name))
             blobs.append(blob)
     #TO-DO: filter out registries on table proccesed-files
+    print("FILES:")
+    print (blobs)
     return blobs
 
 
