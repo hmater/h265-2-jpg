@@ -38,7 +38,7 @@ def exist(file_name):
 
     print("FILE NAME" +  file_name)
     for row in rows:
-        print("FILE INDB" +  row)
+        print("FILE INDB" +  str(row))
         
     # if (file_name in rows):
     #     return True
