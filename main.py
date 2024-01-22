@@ -18,7 +18,7 @@ def extract_frames(input_file, output_folder):
     os.makedirs(output_folder, exist_ok=True)
 
     while success:
-        frame_path = f"{output_path}/frame_{count:04d}.jpg"
+        frame_path = f"{output_folder}/frame_{count:04d}.jpg"
         cv2.imwrite(frame_path, image)
         success, image = video_capture.read()
         count += 1
