@@ -18,7 +18,7 @@ def save(file_name):
         {"filename": file_name, "datetime": dt}
     ]
     print(rows_to_insert)
-    errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
+    errors = client.insert_rows_json(table_id, rows_to_insert)              # Make an API request.
     if errors == []:
         print("new rows have been added.")
     else:
@@ -31,10 +31,9 @@ def exist(file_name):
     table_id = "awentia-data-pipeline.DataVision.processed_files"
     job_config = bigquery.QueryJobConfig(destination=table_id)
 
-    # Perform a query.
     QUERY = ('SELECT filename FROM `DataVision.processed_files` ')
-    query_job = client.query(QUERY)  # API request
-    rows = query_job.result()  # Waits for query to finish
+    query_job = client.query(QUERY)                                         # API request
+    rows = query_job.result()                                               # Waits for query to finish
 
     if (not(file_name in rows)):
         return True
@@ -70,7 +69,7 @@ def get_videos(bucket = 'ap_test_collection_aw1_raw_input', prefix='1000000070d5
     client = storage.Client()
     blobs = []
     for blob in client.list_blobs(bucket, prefix=prefix):
-        if(str(blob.name).endswith('.h265')):
+        if(str(blob.name).endswith('.h265') and (exist(blob.name.replace("/","_").replace(".","_")))):
             print (str(blob.name))
             blobs.append(blob)
     #TO-DO: filter out registries on table proccesed-files
@@ -90,8 +89,8 @@ if __name__ == "__main__":
     # Download file from bucket.
     blobs[0].download_to_filename(temp_local_filename)
     output_folder = "output"
-    #extract_frames(temp_local_filename, output_folder,file_name)
-    print(exist(file_name))
+    extract_frames(temp_local_filename, output_folder,file_name)
+    #print(exist(file_name))
 
 
 
