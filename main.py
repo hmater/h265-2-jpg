@@ -3,7 +3,7 @@ import os
 import sys
 
 
-def extract_frames(input_file, output_path):
+def extract_frames(input_file, output_folder):
     video_capture = cv2.VideoCapture(input_file)
     if not video_capture.isOpened():
         print("Error opening the video file.")
